@@ -4,7 +4,6 @@ require 'spec_helper'
 RSpec.describe WikisController, type: :controller do
 
   # let(:my_user) {User.create!(email: "user@blocipedia.com", password: "helloworld")}
-  #
   # let(:my_wiki) {Wiki.create!(title: "Dogs", body: "Happy Beings", private: false, user_id: my_user.id)}
   # let(:my_user){create(:user)}
   # let(:my_wiki){create(:wiki)}
@@ -14,6 +13,7 @@ RSpec.describe WikisController, type: :controller do
       @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
       @testuser.skip_confirmation!
       @testuser.save
+      sign_in @testuser
       @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
       @testwiki.save
     end
@@ -36,6 +36,14 @@ RSpec.describe WikisController, type: :controller do
   # end
   #
   describe "GET new" do
+    before do
+      @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
+      @testuser.skip_confirmation!
+      @testuser.save
+      sign_in @testuser
+      @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
+      @testwiki.save
+    end
     it "returns http success" do
       get :new
       expect(response).to have_http_status(:success)
@@ -51,17 +59,27 @@ RSpec.describe WikisController, type: :controller do
     end
   end
   describe "POST create" do
+    before do
+      @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
+      @testuser.skip_confirmation!
+      @testuser.save
+      sign_in @testuser
+      # @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
+      # @testwiki.save
+    end
     it "increases the number of Wiki by 1" do
-      expect{wiki :create, wiki: {title: "Dogs", body: "Happy Beings", private: false, user_id: my_user.id }}.to change(Wiki,:count).by(1)
+       expect{post :create, wiki: {title: "Dogs", body: "Happy Beings", private: false, user: @testuser }}.to change(Wiki,:count).by(1)
+      # expect{@testwiki}.to change(Wiki,:count).by(1)
     end
     it "assigns the new wiki to @wiki" do
-      wiki :create, wiki: {title: "Dogs", body: "Happy Beings", private: false, user_id: my_user.id }
+      post :create, wiki: {title: "Dogs", body: "Happy Beings", private: false, user: @testuser }
       expect(assigns(:wiki)).to eq Wiki.last
     end
     it "redirects to the new wiki" do
-      wiki :create, wiki: {title: "Dogs", body: "Happy Beings", private: false, user_id: my_user.id }
+      post :create, wiki: {title: "Dogs", body: "Happy Beings", private: false, user: @testuser}
       expect(response).to redirect_to Wiki.last
     end
+
   end
   #
   # describe "GET #edit" do
