@@ -28,13 +28,7 @@ RSpec.describe WikisController, type: :controller do
     end
   end
 
-  # describe "GET #show" do
-  #   it "returns http success" do
-  #     get :show
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-  #
+
   describe "GET new" do
     before do
       @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
@@ -81,12 +75,115 @@ RSpec.describe WikisController, type: :controller do
     end
 
   end
-  #
-  # describe "GET #edit" do
-  #   it "returns http success" do
-  #     get :edit
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  describe "GET show" do
+    before do
+      @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
+      @testuser.skip_confirmation!
+      @testuser.save
+      sign_in @testuser
+      @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
+      @testwiki.save
+    end
+     it "returns http success" do
+
+       get :show, {id: @testwiki.id}
+       expect(response).to have_http_status(:success)
+     end
+     it "renders the #show view" do
+ # #17
+       get :show, {id: @testwiki.id}
+       expect(response).to render_template :show
+     end
+
+     it "assigns @testwiki to @wiki" do
+       get :show, {id: @testwiki.id}
+ # #18
+       expect(assigns(:wiki)).to eq(@testwiki)
+     end
+   end
+   describe "GET edit" do
+     before do
+       @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
+       @testuser.skip_confirmation!
+       @testuser.save
+       sign_in @testuser
+       @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
+       @testwiki.save
+     end
+      it "returns http success" do
+        get :edit, {id: @testwiki.id}
+        expect(response).to have_http_status(:success)
+      end
+
+      it "renders the #edit view" do
+        get :edit, {id: @testwiki.id}
+        expect(response).to render_template :edit
+      end
+
+      it "assigns post to be updated to @post" do
+        get :edit, {id: @testwiki.id}
+        wiki_instance = assigns(:wiki)
+        expect(wiki_instance.id).to eq @testwiki.id
+        expect(wiki_instance.title).to eq @testwiki.title
+        expect(wiki_instance.body).to eq @testwiki.body
+        expect(wiki_instance.private).to eq @testwiki.private
+      end
+    end
+
+    describe "PUT update" do
+      before do
+        @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
+        @testuser.skip_confirmation!
+        @testuser.save
+        sign_in @testuser
+        @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
+        @testwiki.save
+      end
+     it "updates wiki with expected attributes" do
+       new_title = "Dogs New"
+       new_body = "Dogs can be dangerous"
+       new_private = true
+
+       put :update, id: @testwiki.id, wiki: {title: new_title, body: new_body, private: new_private}
+
+       updated_wiki = assigns(:wiki)
+       expect(updated_wiki.id).to eq @testwiki.id
+       expect(updated_wiki.title).to eq new_title
+       expect(updated_wiki.body).to eq new_body
+       expect(updated_wiki.private).to eq new_private
+
+     end
+
+     it "redirects to the updated post" do
+       new_title = "Dogs New"
+       new_body = "Dogs can be dangerous"
+       new_private = true
+
+       put :update, id: @testwiki.id, wiki: {title: new_title, body: new_body, private: new_private}
+       expect(response).to redirect_to @testwiki
+     end
+    end
+    describe "DELETE destroy" do
+      before do
+        @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
+        @testuser.skip_confirmation!
+        @testuser.save
+        sign_in @testuser
+        @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
+        @testwiki.save
+      end
+       it "deletes the wiki" do
+         delete :destroy, {id: @testwiki.id}
+   # #6
+         count = Wiki.where({id: @testwiki.id}).size
+         expect(count).to eq 0
+       end
+
+     it "redirects to posts index" do
+       delete :destroy, {id: @testwiki.id}
+ # #7
+       expect(response).to redirect_to wikis_path
+     end
+   end
 
 end
