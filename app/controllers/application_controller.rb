@@ -5,5 +5,4 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, :except => :index, unless: :devise_controller?
   before_action :authenticate_user!
   protect_from_forgery with: :exception
-
 end

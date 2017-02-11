@@ -5,11 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create!(
+admin = User.create!(
   email: 'admin@example.com',
   password: 'adminpw',
   role: 0
 )
+admin.skip_confirmation!
+admin.save!
 users = User.all
 
 Wiki.create!(
