@@ -8,3 +8,10 @@
     </div>
   </div>
 <% end %>
+<div class="row">
+  <div class="col-md-8">
+    <% if policy(Wiki).new? %>
+      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

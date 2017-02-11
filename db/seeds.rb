@@ -6,8 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create!(
-  email: 'user@blocipedia.com',
-  password: 'helloworld'
+  email: 'admin@example.com',
+  password: 'adminpw',
+  role: 0
 )
 users = User.all
 
