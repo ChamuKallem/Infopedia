@@ -3,7 +3,7 @@ class WikiPolicy < ApplicationPolicy
     true
   end
   def update?
-    user.present? && !record.private
+    user.present? && (user.premium? || user.admin? || !record.private)
   end
   def create?
     user.present?

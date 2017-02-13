@@ -1,0 +1,24 @@
+<%= form_tag charges_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-8">
+        <p class="charges-info">Pay with card to upgrade your monthly subscription to a premium user of Blocipedia</p>
+        <p class="charges-info">As a premium user you can create private Wikis and only you can edit these wikis. </p>
+      </div>
+    </div>
+    <label class="amount">
+      <span>Amount: $15.00</span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="500"
+          data-locale="auto"></script>
+<% end %>

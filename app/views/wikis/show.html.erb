@@ -1,7 +1,11 @@
 <h1><%= @wiki.title %></h1>
 <div class="row">
   <div class="col-md-8">
-    <p><%= @wiki.body %> <%= check_box_tag "private", @wiki.private, @wiki.private, disabled: true %></p>
+    <p><%= @wiki.body %>
+      <% if current_user.premium? || current_user.admin? %>
+        <%= check_box_tag "private", @wiki.private, @wiki.private, disabled: true %>
+      <% end %>
+    </p>
   </div>
   <div class="col-md-4">
     <% if policy(@wiki).update? %>
