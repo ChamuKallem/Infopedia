@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   resources :wikis
-  resources :charges, only: [:new, :create]
+  resources :charges, only: [:new, :create, :destroy]
+  # resources :charges do
+  #   member do
+  #     get 'delete' => 'charges#destroy'
+  #   end
+  # end
   devise_for :users, controllers: {registrations: 'registrations'}
   get 'about' => 'welcome#about'
   root 'welcome#index'
