@@ -1,8 +1,11 @@
 class WikisController < ApplicationController
 
   def index
-    @wikis = Wiki.all
-    authorize @wikis
+    # @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
+    puts "In wikis controller index function"
+    puts @wikis.count 
+    # authorize @wikis
   end
 
   def show
@@ -23,7 +26,7 @@ class WikisController < ApplicationController
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]
      @wiki.private = params[:wiki][:private]
-     @wiki.user = current_user
+     @wiki.user_id = current_user.id
 
  # #10
      if @wiki.save

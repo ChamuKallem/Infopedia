@@ -1,0 +1,11 @@
+<%= form_tag [wiki, Collaborator.new], method: :wiki do %>
+  <%= select_tag :collaborator, options_from_collection_for_select(User.all, "id", "email"), rows: 8, class: 'form-control' %>
+  <%= submit_tag "Add User" %>
+<% end %>
+
+
+<!--
+<div>
+  <%  %>
+  <%= select_tag :collaborator, options_from_collection_for_select(User.all, "id", "email"), rows: 8, class: 'form-control' %>
+</div -->

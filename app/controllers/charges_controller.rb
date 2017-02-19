@@ -41,6 +41,10 @@ class ChargesController < ApplicationController
       flash[:notice] = "Charge was deleted."
       current_user.role = 1
       current_user.stripe_id = nil
+      current_user.wikis.each do |w|
+        puts w.private
+        w.private = false
+      end
       current_user.save
       redirect_to wikis_path
     else

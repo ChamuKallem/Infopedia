@@ -1,5 +1,6 @@
 <h1>List of all the Wikis</h1>
 <% @wikis.each do |wiki| %>
+
   <div class="media">
     <div class="media-body">
       <h4 class="media-heading">
@@ -8,6 +9,7 @@
     </div>
   </div>
 <% end %>
+
 <div class="row">
   <div class="col-md-8">
     <% if policy(Wiki).new? %>
