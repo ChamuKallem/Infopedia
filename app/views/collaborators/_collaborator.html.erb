@@ -1,6 +1,12 @@
 <%= form_tag [wiki, Collaborator.new], method: :wiki do %>
-  <%= select_tag :collaborator, options_from_collection_for_select(User.all, "id", "email"), rows: 8, class: 'form-control' %>
-  <%= submit_tag "Add User" %>
+  <% user_list = User.where.not(id: current_user)
+                      .where.not(id: wiki.users)
+                      .all %>
+  <%= select_tag :collaborator, options_from_collection_for_select(user_list, "id", "email"), rows: 8, class: 'form-control' %>
+  <%= submit_tag "Add a collaborator" %>
+  <% if collaborator = wiki.collaborators.where(wiki_id: wiki.id).first %>
+   <%= link_to "Remove", [wiki, collaborator], method: :delete, data: { confirm: 'Are you sure you want to remove this user?'} %>
+  <% end %>
 <% end %>
 
 
