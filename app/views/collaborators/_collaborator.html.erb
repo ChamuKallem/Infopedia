@@ -8,10 +8,3 @@
    <%= link_to "Remove", [wiki, collaborator], method: :delete, data: { confirm: 'Are you sure you want to remove this user?'} %>
   <% end %>
 <% end %>
-
-
-<!--
-<div>
-  <%  %>
-  <%= select_tag :collaborator, options_from_collection_for_select(User.all, "id", "email"), rows: 8, class: 'form-control' %>
-</div -->

@@ -21,7 +21,7 @@ class CollaboratorsController < ApplicationController
     @user = User.where(id: id).first
     @collaborator = @wiki.collaborators.find(params[:id])
     if @collaborator.destroy
-      flash[:notice] = "Added a collaborator"
+      flash[:notice] = "Removed a collaborator"
     else
       flash[:alert] = "can't add a collaborator"
     end
