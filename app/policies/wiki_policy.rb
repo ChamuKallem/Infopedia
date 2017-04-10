@@ -20,15 +20,7 @@ class WikiPolicy < ApplicationPolicy
         all_wikis = scope.all
         wikis = []
         all_wikis.each do |wiki|
-          puts "Each wiki info"
-          puts wiki.title
-          wiki.collaborators.each do |c|
-            puts "I am a user"
-            puts user.id
-            puts c.user_id
-            puts (wiki.collaborators.map(&:user_id).include? user.id)
-          end
-          if wiki.private? || (wiki.collaborators.map(&:user_id).include? user.id)
+          if !(wiki.private?) || (wiki.collaborators.map(&:user_id).include? user.id) || (wiki.user_id == user.id)
             wikis << wiki
           end
         end
