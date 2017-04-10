@@ -3,8 +3,6 @@ class WikisController < ApplicationController
   def index
     # @wikis = Wiki.all
     @wikis = policy_scope(Wiki)
-    puts "In wikis controller index function"
-    puts @wikis.count 
     # authorize @wikis
   end
 
