@@ -12,3 +12,32 @@
   .wiki-list{
     margin-top: 10px;
   }
+  .helper-link {
+    text-align: center;
+    padding: 1rem;
+  }
+  .helper-link-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    text-align: center;
+  }
+  .page-header {
+    font-size: x-large;
+    font-weight: 400;
+    text-align: center;
+  }
+  .navbar-default {
+    background-color: dimgrey;
+  }
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
+.navbar-default .navbar-brand {
+  font-size: x-large;
+  font-weight: 300;
+  color: white;
+}
+.btn-new-wiki {
+  background-color: rgb(192,192,192);
+  color: white;
+}

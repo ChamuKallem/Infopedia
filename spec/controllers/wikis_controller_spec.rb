@@ -11,7 +11,7 @@ RSpec.describe WikisController, type: :controller do
   describe "GET index" do
     before do
       @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
-      @testuser.skip_confirmation!
+      # @testuser.skip_confirmation!
       @testuser.save
       sign_in @testuser
       @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
@@ -32,7 +32,7 @@ RSpec.describe WikisController, type: :controller do
   describe "GET new" do
     before do
       @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
-      @testuser.skip_confirmation!
+      # @testuser.skip_confirmation!
       @testuser.save
       sign_in @testuser
       @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
@@ -55,7 +55,7 @@ RSpec.describe WikisController, type: :controller do
   describe "POST create" do
     before do
       @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
-      @testuser.skip_confirmation!
+      # @testuser.skip_confirmation!
       @testuser.save
       sign_in @testuser
       # @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
@@ -78,7 +78,7 @@ RSpec.describe WikisController, type: :controller do
   describe "GET show" do
     before do
       @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
-      @testuser.skip_confirmation!
+      # @testuser.skip_confirmation!
       @testuser.save
       sign_in @testuser
       @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
@@ -104,7 +104,7 @@ RSpec.describe WikisController, type: :controller do
    describe "GET edit" do
      before do
        @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
-       @testuser.skip_confirmation!
+      #  @testuser.skip_confirmation!
        @testuser.save
        sign_in @testuser
        @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
@@ -133,7 +133,7 @@ RSpec.describe WikisController, type: :controller do
     describe "PUT update" do
       before do
         @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
-        @testuser.skip_confirmation!
+        # @testuser.skip_confirmation!
         @testuser.save
         sign_in @testuser
         @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)
@@ -166,7 +166,7 @@ RSpec.describe WikisController, type: :controller do
     describe "DELETE destroy" do
       before do
         @testuser = User.new(email: "user@blocipedia.com", password: "helloworld")
-        @testuser.skip_confirmation!
+        # @testuser.skip_confirmation!
         @testuser.save
         sign_in @testuser
         @testwiki = Wiki.new(title: "Dogs", body: "Happy Beings", private: false, user: @testuser)

@@ -11,7 +11,7 @@ admin = User.create!(
   password: 'adminpw',
   role: 0
 )
-admin.skip_confirmation!
+# admin.skip_confirmation!
 admin.save!
 
 3.times do

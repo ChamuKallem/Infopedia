@@ -1,19 +1,21 @@
-<h1>List of all the Wikis</h1>
-<% @wikis.each do |wiki| %>
-
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <p><%= link_to wiki.title, wiki %></p>
-      </h4>
-    </div>
-  </div>
-<% end %>
-
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-4 col-md-offset-4 page-header">
+    List of all the Wikis
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% @wikis.each do |wiki| %>
+      <div class="list-group">
+        <h4><%= link_to wiki.title, wiki, class: "list-group-item" %></h4>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
     <% if policy(Wiki).new? %>
-      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-new-wiki btn-block' %>
     <% end %>
   </div>
 </div>

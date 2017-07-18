@@ -2,12 +2,16 @@
   <% user_list = User.where.not(id: current_user)
                       .where.not(id: wiki.users)
                       .all %>
-  
-  <%= select_tag :collaborator, options_from_collection_for_select(user_list, "id", "email", params[:id].to_i), rows: 8, class: 'form-control' %>
-  <%= submit_tag "Add a collaborator" %>
-  <% if Collaborator.count > 0 %>
-    <% col_list = Collaborator.where.not(id: current_user)
-                        .all%>
+
+    <div class="form-group">
+      <%= select_tag :collaborator, options_from_collection_for_select(user_list, "id", "email", params[:id].to_i), rows: 8, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag "Add a collaborator", class: "btn btn-basic" %>
+      <% if Collaborator.count > 0 %>
+        <% col_list = Collaborator.where.not(id: current_user)
+                            .all%>
+    </div>
   <% end %>
   <%= div_for(col_list) do |collab| %>
     <%= collab.email %>
